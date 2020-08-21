@@ -1,4 +1,4 @@
-import {identity} from './constants'
+import {identity} from './utils'
 
 class Api {
   constructor({token, url}) {
