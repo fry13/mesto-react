@@ -31,7 +31,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setImagePopupOpen(false);
-    setSelectedCard('');
+    setTimeout(function () {setSelectedCard('')}, 200)
   }
 
   return (
