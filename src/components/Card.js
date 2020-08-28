@@ -1,8 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-function Card({card, onCardClick}) {
+function Card({card, onCardClick, onCardLike, onCardDelete, cardDeleteButtonClassName, cardLikeButtonClassName}) {
   function handleClick() {
     onCardClick(card);
+  }
+  function handleLike() {
+    onCardLike(card)
+  }
+  function handleDelete() {
+    onCardDelete(card)
   }
 
   return (
@@ -11,11 +17,11 @@ function Card({card, onCardClick}) {
       <div className="elements__container">
         <p className="elements__title">{card.name}</p>
         <div className="elements__like-container">
-          <button type="button" className="elements__like"/>
+          <button type="button" onClick={handleLike} className={cardLikeButtonClassName}/>
           <p className="elements__counter">{card.likes.length}</p>
         </div>
       </div>
-      <button type="button" className="elements__trash-bin" />
+      <button type="button" onClick={handleDelete} className={`elements__trash-bin ${cardDeleteButtonClassName}`} />
     </div>
   )
 }
