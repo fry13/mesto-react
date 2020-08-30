@@ -62,7 +62,6 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
         <button type="submit" className="popup__save">Сохранить</button>
       </fieldset>
     </PopupWithForm>
-
   )
 }
 

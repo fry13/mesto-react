@@ -6,18 +6,20 @@ import EditProfilePopup from './EditProfilePopup'
 import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from './AddPlacePopup'
 import ImagePopup from './ImagePopup';
+import DeleteCardPopup from './DeleteCardPopup'
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import {api} from "../utils/api";
+import defaultAvatar from '../images/userpic.png'
 
 function App() {
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  // const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
+  const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState('');
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState({name: 'Имя', about: 'Информация', avatar: defaultAvatar});
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -37,7 +39,12 @@ function App() {
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true)
   }
-    function handleCardClick(card) {
+  function handleCardDeleteClick(card) {
+    setSelectedCard(card);
+    setIsDeleteCardPopupOpen(true);
+    console.log(selectedCard)
+  }
+  function handleCardClick(card) {
     setSelectedCard(card);
     setImagePopupOpen(true);
   }
@@ -66,6 +73,8 @@ function App() {
           return item !== card
         });
         setCards(newCards);
+        setSelectedCard('');
+        closeAllPopups();
       })
   }
 
@@ -97,6 +106,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsDeleteCardPopupOpen(false);
     setImagePopupOpen(false);
     setTimeout(function () {setSelectedCard('')}, 200);
   }
@@ -129,18 +139,20 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
         />
 
-        {/*/!*DELETE CARD POPUP*!/*/}
+        {/*DELETE CARD POPUP*/}
 
-        {/*<PopupWithForm*/}
-        {/*  name="delete"*/}
-        {/*  isOpen=""*/}
-        {/*  onClose={closeAllPopups}*/}
-        {/*>*/}
-        {/*  <fieldset className="popup__input-container popup__form popup__form_type_no-input">*/}
-        {/*    <h2 className="popup__title">Вы уверены?</h2>*/}
-        {/*    <button type="submit" className="popup__save">Да</button>*/}
-        {/*  </fieldset>*/}
-        {/*</PopupWithForm>*/}
+        <DeleteCardPopup
+          name="delete"
+          isOpen={isDeleteCardPopupOpen}
+          onClose={closeAllPopups}
+          onDelete={handleCardDelete}
+          selectedCard={selectedCard}
+        >
+          <fieldset className="popup__input-container popup__form popup__form_type_no-input">
+            <h2 className="popup__title">Вы уверены?</h2>
+            <button type="submit" className="popup__save">Да</button>
+          </fieldset>
+        </DeleteCardPopup>
 
         {/*PHOTO POPUP*/}
 
@@ -163,7 +175,7 @@ function App() {
             onEditAvatar={handleEditAvatarClick}
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
+            onCardDelete={handleCardDeleteClick}
           />
 
         {/*FOOTER*/}
