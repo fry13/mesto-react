@@ -20,8 +20,10 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      submitButtonText="Сохранить"
+      formClassNameMod="popup__form_type_two-inputs"
     >
-      <fieldset className="popup__input-container popup__form popup__form_type_two-inputs">
+      <fieldset className="popup__input-container">
         <h2 className="popup__title">Новое место</h2>
         <input
           name="name"
@@ -45,7 +47,6 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
           className="popup__input popup__input_link"
         />
         <span id="link-input-error" className="popup__error"/>
-        <button type="submit" className="popup__save">Сохранить</button>
       </fieldset>
     </PopupWithForm>
   )

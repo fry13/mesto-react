@@ -14,10 +14,11 @@ function DeleteCardPopup({isOpen, onClose, onDelete, selectedCard}) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      submitButtonText="Да"
+      formClassNameMod="popup__form_type_no-input"
     >
-      <fieldset className="popup__input-container popup__form popup__form_type_no-input">
+      <fieldset className="popup__input-container">
         <h2 className="popup__title">Вы уверены?</h2>
-        <button type="submit" className="popup__save">Да</button>
       </fieldset>
     </PopupWithForm>
   )

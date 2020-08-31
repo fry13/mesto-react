@@ -28,6 +28,7 @@ function App() {
         setCurrentUser(user);
         setCards(cards);
       })
+      .catch(handleError)
   },[])
 
   function handleEditAvatarClick() {
@@ -42,7 +43,6 @@ function App() {
   function handleCardDeleteClick(card) {
     setSelectedCard(card);
     setIsDeleteCardPopupOpen(true);
-    console.log(selectedCard)
   }
   function handleCardClick(card) {
     setSelectedCard(card);
@@ -60,9 +60,11 @@ function App() {
     if (isLiked) {
       api.dislikeCard(card._id)
         .then(handleResponseLike)
+        .catch(handleError)
     } else {
       api.likeCard(card._id)
         .then(handleResponseLike)
+        .catch(handleError)
     }
   }
 
@@ -76,6 +78,7 @@ function App() {
         setSelectedCard('');
         closeAllPopups();
       })
+      .catch(handleError)
   }
 
   function handleUpdateUser({name, about}) {
@@ -84,6 +87,7 @@ function App() {
         setCurrentUser(res);
         closeAllPopups();
       })
+      .catch(handleError)
   }
 
   function handleUpdateAvatar(avatar) {
@@ -92,6 +96,7 @@ function App() {
         setCurrentUser(res);
         closeAllPopups();
       })
+      .catch(handleError)
   }
 
   function handleAddPlaceSubmit({name, link}) {
@@ -100,6 +105,12 @@ function App() {
         setCards([res, ...cards]);
         closeAllPopups();
       })
+      .catch(handleError)
+  }
+
+  function handleError(error) {
+    console.error(error);
+    return Promise.reject(error.message)
   }
 
   function closeAllPopups () {
@@ -147,12 +158,7 @@ function App() {
           onClose={closeAllPopups}
           onDelete={handleCardDelete}
           selectedCard={selectedCard}
-        >
-          <fieldset className="popup__input-container popup__form popup__form_type_no-input">
-            <h2 className="popup__title">Вы уверены?</h2>
-            <button type="submit" className="popup__save">Да</button>
-          </fieldset>
-        </DeleteCardPopup>
+        />
 
         {/*PHOTO POPUP*/}
 

@@ -31,8 +31,10 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      submitButtonText="Сохранить"
+      formClassNameMod="popup__form_type_two-inputs"
     >
-      <fieldset className="popup__input-container popup__form popup__form_type_two-inputs">
+      <fieldset className="popup__input-container">
         <h2 className="popup__title">Редактировать профиль</h2>
         <input
           name="name"
@@ -59,7 +61,6 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
           maxLength="200"
           className="popup__input popup__input_bio" />
         <span id="bio-input-error" className="popup__error"/>
-        <button type="submit" className="popup__save">Сохранить</button>
       </fieldset>
     </PopupWithForm>
   )

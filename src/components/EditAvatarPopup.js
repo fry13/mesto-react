@@ -17,8 +17,10 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      submitButtonText="Сохранить"
+      formClassNameMod="popup__form_type_one-input"
     >
-      <fieldset className="popup__input-container popup__form popup__form_type_one-input">
+      <fieldset className="popup__input-container">
         <h2 className="popup__title">Обновить аватар</h2>
         <input
           name="avatar"
@@ -30,7 +32,6 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
           className="popup__input popup__input_link"
         />
         <span id="avatar-input-error" className="popup__error"/>
-        <button type="submit" className="popup__save">Сохранить</button>
       </fieldset>
     </PopupWithForm>
   );
